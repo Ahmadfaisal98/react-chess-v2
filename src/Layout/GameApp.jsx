@@ -48,8 +48,6 @@ function GameApp() {
     await navigator.clipboard.writeText(shareableLink);
   }
 
-  console.log(game);
-
   if (loading) {
     return "loading";
   }
@@ -76,9 +74,14 @@ function GameApp() {
         </h2>
       )}
       <div className="board-container">
-        <span className="tag is-link">{game?.member?.name}</span>
+        {id !== "local" && (
+          <span className="tag is-link">{game?.member?.name}</span>
+        )}
+
         <Board board={board} position={position} />
-        <span className="tag is-link">{game?.openent?.name}</span>
+        {id !== "local" && (
+          <span className="tag is-link">{game?.openent?.name}</span>
+        )}
       </div>
       {result && <p className="vertical-text">{result}</p>}
       {status === "waiting" && (
